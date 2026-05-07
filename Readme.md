@@ -1,50 +1,100 @@
 # 🤖 Meeting Agenda Agent
 
-An automated AI collaborator that transforms messy meeting notes or brief objectives into professional, time-boxed meeting agendas.
-
-## 📝 Overview
-The **Meeting Agenda Agent** is a Python-based utility designed to solve the "aimless meeting" problem. By providing a simple text description of a meeting's goals, the agent uses LLM reasoning to mathematically distribute time, assign owners, and define clear outcomes.
-
-### Why this is different:
-Unlike simple chat prompts, this agent uses **OpenAI Structured Outputs**. This means the AI is physically incapable of returning a broken format; it must strictly adhere to the defined Pydantic schema, making it robust enough for production pipelines.
-
+> A Python-based AI agent that transforms a brief meeting description into a professional, time-boxed agenda — complete with owners, outcomes, and structured output ready for calendars or pipelines.
 ---
 
+## 📝 Overview
+
+The **Meeting Agenda Agent** tackles the "aimless meeting" problem head-on. You provide a plain-text description of your meeting's goals; the agent uses LLM reasoning to distribute time intelligently, assign topic owners, and define clear outcomes for every agenda item.
+
+What makes it production-ready: the agent uses **OpenAI Structured Outputs** with a strict Pydantic schema, meaning the AI is physically constrained to return well-formed JSON every time — no parsing hacks, no brittle string extraction.
+---
 ## ✨ Features
-*   **Structured Data:** Uses Pydantic models for 100% reliable JSON extraction.
-*   **Time-Boxing:** Automatically calculates `time_minutes` for each topic to ensure the total duration is respected.
-*   **Dual Output:** 
-    *   `agenda.txt`: A clean, human-readable report for distribution.
-    *   `agenda.json`: A machine-readable file for calendar or database integration.
-*   **Error Handling:** Includes robust validation for API calls and file I/O operations.
+
+- **Schema-enforced output** — Pydantic v2 models guarantee 100% reliable JSON extraction via OpenAI's Structured Outputs API
+- **Automatic time-boxing** — calculates `time_minutes` per topic so the total always matches your target duration
+- **Owner & outcome assignment** — each agenda item gets a responsible party and a defined expected outcome
+- **Dual output formats:**
+  - `agenda.txt` — clean, human-readable report ready to paste into an invite or email
+  - `agenda.json` — machine-readable file for calendar, database, or downstream pipeline integration
+- **Robust error handling** — graceful validation for API calls and file I/O operations
 
 ---
 
 ## 🛠️ Tech Stack
-*   **Language:** Python 3.14
-*   **AI Engine:** OpenAI GPT-4o-mini
-*   **Validation:** Pydantic v2
-*   **Interface:** OpenAI Beta Parsing API
+
+| Layer | Technology |
+|---|---|
+| Language | Python 3.10+ |
+| AI Engine | OpenAI GPT-4o-mini |
+| Validation | Pydantic v2 |
+| API Interface | OpenAI Beta Parsing API |
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Prerequisites
-*   Python 3.10 or higher.
-*   An OpenAI API Key.
+### Prerequisites
 
-### 2. Installation
-Clone the repository and install the required dependencies:
+- Python 3.10 or higher
+- An [OpenAI API key](https://platform.openai.com/api-keys)
+
+### Installation
+
+**1. Clone the repository**
+
 ```bash
-git clone [https://github.com/YOUR_USERNAME/Meeting-Agenda-Agent.git](https://github.com/YOUR_USERNAME/Meeting-Agenda-Agent.git)
+git clone https://github.com/Crevatec/Meeting-Agenda-Agent.git
 cd Meeting-Agenda-Agent
+```
+
+**2. Install dependencies**
+
+```bash
 pip install openai pydantic
+```
 
-### Windows PowerShell  
+**3. Set your OpenAI API key**
+
+macOS / Linux:
+```bash
+export OPENAI_API_KEY="sk-your-key-here"
+```
+
+Windows (PowerShell):
+```powershell
 $env:OPENAI_API_KEY="sk-your-key-here"
+```
 
-Run python agent.py
+**4. Run the agent**
 
-🛡️ License
-This project is licensed under the MIT License.
+```bash
+python agent.py
+```
+
+---
+
+## 📤 Output
+
+After running, two files are generated in the project root:
+
+| File | Format | Purpose |
+|---|---|---|
+| `agenda.txt` | Plain text | Human-readable — share in emails or meeting invites |
+| `agenda.json` | JSON | Machine-readable — integrate with calendars or databases |
+
+---
+
+## 🗂️ Project Structure
+
+```
+Meeting-Agenda-Agent/
+├── agent.py        # Main agent script
+├── agenda.txt      # Generated plain-text agenda
+├── agenda.json     # Generated JSON agenda
+└── README.md
+```
+---
+## 📄 License
+
+MIT — free to use, modify, and distribute.
